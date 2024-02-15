@@ -1,207 +1,218 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
     <!-- Add your CSS link here -->
     <style>
-        *{
-            padding: 0; margin: 0;
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        height: 100vh;
+        background: url("{% static "blog_login/images/back.jpg" %}");
+        background-repeat: no-repeat;
+        background-position: top right;
+
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .overlay {
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.23),
+          rgba(0, 0, 0, 0)
+        ); /* Black gradient overlay */
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 1;
+      }
+
+      .container {
+        animation: one 0.5s forwards 1 ease-in;
+        position: relative;
+        z-index: 2;
+      }
+
+      h2 {
+        color: rgb(0, 0, 0);
+        font-size: 27px;
+        position: absolute;
+        top: -40px;
+      }
+
+      @keyframes one {
+        0% {
+          transform: translateY(-100%) scale(0.5);
+          opacity: 0;
         }
 
-        body{
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            height: 100vh;
-            background: url('../../static/images/back.jpg');
-            background-repeat: no-repeat;
-            background-size: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            
-
+        90% {
+          transform: translateY(-10%);
+          opacity: 1;
+          transform: scale(1.1);
         }
-
-        .overlay{
-            background: linear-gradient(to bottom, rgba(0,0,0,0.14), rgba(0,0,0,0)); /* Black gradient overlay */
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            z-index: 1;
+        100% {
+          transform: translateY(0);
+          transform: scale(1.2);
         }
-
-        .container{
-          
-            animation: one .5s forwards 1 ease-in;
-            position: relative;
-            z-index: 2;
-
-         
-        }
-
-        
-        h2{ 
-            color: rgb(0, 0, 0);
-            font-size: 27px;
-            position: absolute;
-            top:-40px;
-        }
-
-        @keyframes one {
-                0%{
-                    transform: translateY(-100%) scale(0.5);
-                    opacity: 0;
-                    
-                     
-                }
-
-                90%{
-                    transform: translateY(-10%);
-                    opacity: 1;
-                    transform: scale(1.1);
-                   
-                }
-                100%{
-                    transform: translateY(0);
-                    transform: scale(1.2);
-                }
-            }
-
-            img{
-            max-width: 150px;
-            position: absolute;
-            opacity: 0;
-            transition: 2.5s opacity ease-out;
-            transition: .25s transform ease-in-out;
-        }
-
-       
-
-        form{
-            display: flex;
-            flex-direction: column;
-            padding: 12px 20px;
-            background-color: transparent;
-            align-items: center;
-            justify-content: center;
-            gap: 22px;
-            font-size: 22px;
-            max-width: 400px;
-            
-            border-top-left-radius: 25px;
-            border-bottom-right-radius: 25px;
-            border: 2px solid rgb(23, 23, 23);
-            transition: 0.25s transform;
-            
-        }
-
-        form:hover{
-            transform: scale(1.023) translateX(-10%);
-        }
-
-        form:hover img{
-            transform: translateX(200%);
-            opacity: 1;
-        }
-
-       
-       
+      }
 
     
 
+      form {
+        display: flex;
+        flex-direction: column;
+        padding: 12px 20px;
+        background-color: rgba(0, 0, 0, 0.42);
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        font-size: 22px;
+        max-width: 400px;
+        border-top-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        border: 2px solid rgb(23, 23, 23);
+        transition: 0.25s transform ease , 0.25s background-color ease, 0.25s color ease;
+        backdrop-filter: blur(5px);
+    
+        color:white;
+      }
 
+      form:hover {
+        transform: scale(1.023) translateX(-10%);
+        background-color: rgba(255, 255, 255, 0.15);
+        color:black;
+        
+      }
 
-        .form-group{
-            display: flex;
-            flex-direction: column;
-        }
+     
 
-        input{
-            padding: 10px 20px;
-            max-width:300px;
-            background-color: rgba(182, 182, 182, 0.25);
-            box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.25);
-            font-size: 16px;
-            color: black;
-            font-weight: bold;
-            
-         
-        }
+   
 
-        button{
-            padding: 5px 18px ;
-            background-color: rgb(0, 0, 0);
-            color: white;
-            border-radius: 5px;
-            border: none;
-            font-size: 22px;
-            transition-property: text-shadow background-color;
-            transition-duration: 1.25s;
-            transition-timing-function: ease-in-out;
-            cursor: pointer;
-        }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
 
-        button:hover{
-            text-shadow: 0 0 3px rgb(266,266, 266);
-            background-color: rgb(25, 25, 25);
-        }
+      input {
+        padding: 10px 20px;
+        max-width: 300px;
+        background-color: rgba(182, 182, 182, 0.25);
+        box-shadow: 0 0 2px 3px rgba(0, 0, 0, 0.25) inset;
+        font-size: 16px;
+        color: black;
+        font-weight: bold;
+      }
 
-        ul{
-            display: flex;
-            background-color: white;
-            border: 1px solid black;
-            max-width: 500px;
-            padding: 4px 12px;
-        }
+     
+      button {
+        padding: 5px 18px;
+        background-color: rgb(0, 0, 0);
+        color: white;
+        border-radius: 5px;
+        border: none;
+        font-size: 22px;
+        transition-property: text-shadow background-color, box-shadow;
+        transition-duration: .25s;
+        transition-timing-function: ease-in-out;
+        cursor: pointer;
+      }
 
-        ul li{
-            list-style: none;
-        }
+      button:hover {
+        text-shadow: 0 0 3px rgb(266, 266, 266);
+        background-color: rgb(25, 25, 25);
+        box-shadow: 0 0 0.5rem 0.1rem  rgb(255, 255, 255);
 
+      }
+
+    
+
+      ul {
+        display: flex;
+        background-color: white;
+        border: 1px solid black;
+        max-width: 500px;
+        padding: 4px 12px;
+      }
+
+      ul li {
+        list-style: none;
+      }
     </style>
-</head>
-<body>
-    <div class="overlay">
-
-    </div>
+  </head>
+  <body>
+    <div class="overlay"></div>
     <div class="container">
+      <div class="register-form">
+        <h2>Register</h2>
 
-        <div class="register-form">
-            <h2>Register</h2>
-            
-            <form method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="form-group">
-                    <label for="confirm_password">Confirm Password:</label>
-                    <input type="password" id="confirm_password" name="confirm_password" required>
-                </div>
-                <button type="submit">Register</button>
-                <img src="./enrollment.png" alt="">
-            </form>
-          
-            {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        </div>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <div class="form-group">
+            <label for="confirm_password">Confirm Password:</label>
+            <input
+              type="password"
+              id="confirm_password"
+              name="confirm_password"
+              required
+            />
+          </div>
+          <button type="submit">Register</button>
+        
+
+        {% if messages %}
+        <ul>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
     </div>
-    <script></script>
-</body>
-</html>
+    <script src="https://cdn.jsdelivr.net/npm/lottie-web"></script>
+    <script>
+      const form = document.getElementsByTagName("form")[0]; // Access the first form element
+      const overLay = document.querySelector(".overlay");
 
+      form.addEventListener("mouseenter", () => {
+        document.body.style.transition =
+          "background-size 0.5s ease, background-position 0.5s ease"; // Add transi
+        overLay.style.transition = "opacity 0.5s ease"; // Add transi
+        document.body.style.backgroundPosition = "bottom right";
+        document.body.style.backgroundSize = "115%";
+        overLay.style.opacity = "0";
+      });
+
+      form.addEventListener("mouseleave", () => {
+        // document.body.style.transition = "background-size 0.5s ease"; // Add transi
+        //      document.body.style.transition = "background-position 0.5s ease"; // Add transi
+        document.body.style.backgroundPosition = "top left";
+        document.body.style.backgroundSize = "cover";
+        overLay.style.opacity = "1";
+      });
+    </script>
+  </body>
+</html>
